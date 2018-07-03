@@ -1,0 +1,11 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Commande pizza{% endblock %}
+{% block article %}
+    <article>
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success fade in alert-dismissible" style="margin-top:18px;">
+                <strong>Succès !</strong> {{ message }}
+            </div>
+        {% endfor %}
+    </article>
+{% endblock %}

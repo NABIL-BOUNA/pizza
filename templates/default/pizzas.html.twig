@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Liste pizza{% endblock %}
+{% block article %}
+    <article class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="text-center">Pizza</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Prix</th>
+                <th class="text-center">Ingredient</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pizza in pagination %}
+                <tr align="center">
+                    <td>
+                        {{ pizza.name }}
+                    </td>
+                    <td>
+                        {{ pizza.description }}
+                    </td>
+                    <td>
+                        {{ pizza.price }}
+                    </td>
+                    <td>
+                        {% for ingredient in pizza.getIngredients %}
+                            {{ ingredient.name }},
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-center navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+        <br>
+        <br>
+    </article>
+{% endblock %}

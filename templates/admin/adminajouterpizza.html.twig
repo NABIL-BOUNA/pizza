@@ -1,0 +1,9 @@
+{% extends 'layoutadmin.html.twig' %}
+{% block title %}Tableau de bord{% endblock %}
+{% block body %}
+    <article>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </article>
+{% endblock %}

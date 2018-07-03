@@ -1,0 +1,60 @@
+{% extends 'layoutadmin.html.twig' %}
+{% block title %}Liste pizza{% endblock %}
+{% block body %}
+    <article class="table-responsive">
+        <div class="count">
+            il ya {{ pagination.getTotalItemCount }} commandes
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="text-center">name</th>
+                <th class="text-center">telephone</th>
+                <th class="text-center">adresse</th>
+                <th class="text-center">Pizza</th>
+                <th class="text-center">Etat</th>
+                <th class="text-center">action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for commande in pagination %}
+                <tr align="center">
+                    <td>
+                        {{ commande.nom }}
+                    </td>
+                    <td>
+                        {{ commande.telephone }}
+                    </td>
+                    <td>
+                        {{ commande.adresse }}
+                    </td>
+                    <td>
+                        {% for pizza in commande.getPizzas %}
+                            {{ pizza.name }},
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% if commande.status == 1 %}
+                            <p class="text-success">traitée</p>
+                            {% else %}
+                            <p class="text-danger">non traitée</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if commande.status != 1 %}
+                                <a href="/admin/commande/valider/{{ commande.id }}" class="btn btn-success">valider</a>
+                            {% else %}
+                                <a href="/admin/commande/annuler/{{ commande.id }}" class="btn btn-danger">annuler</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-center navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+        <br>
+        <br>
+    </article>
+{% endblock %}
